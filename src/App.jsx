@@ -5,6 +5,7 @@ const TodoApp = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [todos, setTodos] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   const addTodo = () => {
     const newTodo = {
@@ -19,6 +20,11 @@ const TodoApp = () => {
     const updatedTodos = [...todos];
     updatedTodos.splice(index, 1);
     setTodos(updatedTodos);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark-mode");
   };
 
   return (
@@ -65,11 +71,16 @@ const TodoApp = () => {
             <li key={index}>
               <p className="f-title">{todo.title}</p>
               <p className="f-desc">{todo.desc}</p>
-              <button onClick={() => removeTodo(index)} className="center">Remove</button>
+              <button onClick={() => removeTodo(index)} className="center">
+                Remove
+              </button>
             </li>
           ))}
         </ul>
       </div>
+      <button onClick={toggleDarkMode}>
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
     </div>
   );
 };
